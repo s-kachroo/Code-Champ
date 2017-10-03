@@ -1,0 +1,33 @@
+void diagonalSum(Node *root){
+   queue<Node *>q;
+   q.push(root);
+   q.push(NULL);
+   int sum=0;
+   while(!q.empty()){
+	Node *p=q.front();
+	q.pop();
+
+//Diagonal is over
+	if(p==NULL){
+		cout<<sum;	
+
+		q.push(NULL);
+
+                p=q.front();
+		q.pop();
+
+		if(p==NULL)
+			break;
+	}		
+	//Not sure to intitalise sum=0 here!!s		
+	sum=0;
+
+	while(p!=NULL){
+		sum += p->data;
+
+		if(p->left)
+			q.push(p->left);
+		p->right;
+	}
+   }	
+}

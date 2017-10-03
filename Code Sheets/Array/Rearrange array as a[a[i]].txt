@@ -1,0 +1,40 @@
+#include<iostream>
+#include<algorithm>
+#include<map>
+#include<string>
+using namespace std;
+#define f_in(st) freopen(st,"r",stdin);
+#define f_out(st) freopen(st,"w",stdout);
+
+void rearrange(int A[], int n)
+{
+	// First step: Increase all values by (arr[arr[i]]%n)*n
+	for (int i=0; i < n; i++)
+		A[i] += ( A[A[i]] %n )*n;  //we did %n because we need to add older A[A[i]] values
+
+	// Second Step: Divide all values by n
+	for (int i=0; i<n; i++)
+		A[i] /= n;
+		
+	/* Now we will get old A[i] by doing A[i]%n
+	   and new A[i] by doing A[i]/n; */
+}
+
+int main()
+ {
+	int t,n, A[101],next_i;
+        cin>>t;
+        while(t--)
+        {
+           cin>>n;
+           for(int i=0;i<n;i++)
+             cin>>A[i];
+        
+         rearrange(A,n);
+         for(int i=0;i<n;i++)
+          cout<<A[i]<<" ";
+         
+         cout<<endl;
+        }
+	return 0;
+}

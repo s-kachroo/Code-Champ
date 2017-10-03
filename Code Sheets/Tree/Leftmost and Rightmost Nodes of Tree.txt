@@ -1,0 +1,24 @@
+void printCorner(Node *root)
+{
+    if(!root) return;
+    queue<Node *> q;
+    q.push(root);
+    while(!q.empty()){
+        int s = q.size();
+        Node *first=NULL,*temp;
+        while(s--){
+            if(!first)
+            first= q.front();
+            temp = q.front();
+            q.pop();
+            if(temp->left)
+            q.push(temp->left);
+            if(temp->right)
+            q.push(temp->right);
+        }
+        cout<<first->key<<" ";
+        if(temp != first)
+        cout<<temp->key<<" ";
+    }
+
+}

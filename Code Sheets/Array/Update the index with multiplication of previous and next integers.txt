@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+  int n, e;
+  cin >> n;
+  vector<int> v, v2(n);
+  while (n--) {
+    cin >> e;
+    v.push_back(e);
+  }
+  
+  for (int i = 1; i < v.size() - 1; i++) {
+    v2[i] = v[i - 1] * v[i + 1];
+  }
+  
+  v2[0] = v[0] * v[1];
+  v2[v.size() - 1] = v[v.size() - 1] * v[v.size() - 2];
+
+  for (int i = 0; i < v2.size(); i++) {
+    cout << v2[i] << " ";
+  }
+}

@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+
+int main() {
+    //Compute the number of ppl such that 
+    
+    float num = 365;
+    float denom = 365;
+    
+    //p denotes the prob of some ppl having birthday on same date
+    // same bday = 1 - p
+
+
+    float p = 1;  
+  
+    //n denotes the number of people needed
+    int n = 0;
+    
+    // p becomes less than 0.5 because we are starting from 1
+    while(p>0.5){
+        p = p*(num)/denom;
+        num--;
+        n++;
+        cout<<"Probability is "<<p<<" and "<<" no of people are "<<n<<endl;
+    }
+    
+    return 0;
+}

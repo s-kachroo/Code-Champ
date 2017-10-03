@@ -1,0 +1,29 @@
+//Given a number N, print the Nth catalan number!
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    long long int z;
+    long double ans=1;
+    int k=n;
+   // log(ans)=((2*n)*(log(2*n)))-(n*log(n))-((n+1)*log(n));
+   // cout<<(int(((2*n)*(log(2*n))))-int((n*log(n)))-int(((n+1)*log(n))))+2<<endl;
+
+        for(int i=n+2;i<=(2*n);i++){
+            ans = ans*i;
+            
+            ans=ans/k;
+            k--;
+        //     if(k==n)
+        //         break;
+        }
+		
+    z=round(ans);
+    cout<<z<<endl;
+    return 0;
+}

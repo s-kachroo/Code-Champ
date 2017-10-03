@@ -1,0 +1,48 @@
+/* Function to print nodes of extreme corners
+of each level in alternate order */
+void printExtremeNodes(Node* root)
+{
+    if (root == NULL)  return;
+    // Create a queue and enqueue left and right
+    // children of root
+    queue<Node*> q;
+    q.push(root); 
+    // flag to indicate whether leftmost node or
+    // the rightmost node has to be printed
+    bool flag = false;
+    while (!q.empty())
+    {
+        // nodeCount indicates number of nodes
+        // at current level.
+        int nodeCount = q.size();
+        int n = nodeCount;
+ 
+        // Dequeue all nodes of current level
+        // and Enqueue all nodes of next level
+        while (n--)
+        {
+            Node* curr = q.front();
+ 
+            // Enqueue left child
+            if (curr->left)
+                q.push(curr->left);
+ 
+            // Enqueue right child
+            if (curr->right)
+                q.push(curr->right);
+ 
+            // Dequeue node
+            q.pop();
+ 
+            // if flag is true, print leftmost node
+            if (flag && n == nodeCount - 1)
+                cout << curr->data << " ";
+ 
+            // if flag is false, print rightmost node
+            if (!flag && n == 0)
+                cout << curr->data << " ";
+        }
+        // invert flag for next level
+        flag = !flag;
+    }
+}

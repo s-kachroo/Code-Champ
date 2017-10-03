@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<vector<int> >v(1000);
+int visited[100000]={0};
+void dfs(int node){
+	if(!visited[node]){
+		visited[node]=1;
+		for(int i=0;i<v[node].size();i++){
+			dfs(v[node][i]);
+		}
+	cout<<node<<endl;
+	}
+}
+
+int main() {
+	// your code goes here
+	int n,e;
+	cin>>n>>e;
+	int v1,v2;
+	while(e--){
+		cin>>v1>>v2;
+		v[v1].push_back(v2);
+		v[v2].push_back(v1);
+	}
+	dfs(1);	
+	return 0;
+}

@@ -1,0 +1,75 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <queue>
+#include <stack>
+using namespace std;
+#define ll long long int
+struct node {
+	int data;
+	struct node * left;
+	struct node * right;
+} * root = NULL;
+
+struct node * insertNode(struct node * tNode, int value) {
+	if(tNode == NULL) {
+		struct node * newNode = (struct node *)malloc(sizeof(struct node));
+		newNode->data = value;
+		newNode->left = NULL;
+		newNode->right = NULL;
+		return newNode;
+	}
+	if(tNode->data > value)
+		tNode->left = insertNode(tNode->left, value);
+	else
+		tNode->right = insertNode(tNode->right, value);
+	return tNode;
+}
+
+void buildTree(int a[], int N) {
+	for(int i = 0; i < N; i++) {
+		if(i) {
+			insertNode(root, a[i]);
+		} else {
+			root = insertNode(NULL, a[i]);
+		}
+	}
+}
+int heightOfTree(struct node* root){
+    if(root==NULL)  
+        return 0;
+    return (max(heightOfTree(root->left),heightOfTree(root->right)))+1 ;   
+}
+void print(struct node* root,int level){
+    if(root==NULL)
+        return ;
+    if(level==1){
+        cout<<root->data<<" ";
+    }    
+    else if(level>1){
+        print(root->left,level-1);
+        print(root->right,level-1);
+    }
+}
+/* Implement this method. */
+void reverseLevelOrderTraversal(struct node * root) {
+    int i;
+    int h=heightOfTree(root);
+    
+    for(i=h;i>=0;i--){
+        print(root,i);
+    }
+}
+
+int main() {
+	int N;
+	cin >> N;
+	int arr[N];
+	for(int i = 0; i < N; i++) {
+		cin >> arr[i];
+	}
+	buildTree(arr, N);
+	reverseLevelOrderTraversal(root);
+	cout << endl;
+}

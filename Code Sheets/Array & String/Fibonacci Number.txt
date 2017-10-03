@@ -1,0 +1,23 @@
+//Your task is to calculate Nth Fibonacci number!
+
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+    long int n;
+    cin>>n;
+    long int a=0,b=1,c=0,i;
+    // if(n==1)
+    //   cout<<a;
+    // if(n==2)
+    //   cout<<b;
+    for(i=0;i<n-1;i++)
+    {
+        c=(a+b)%(1000000000+7);
+        a=b;
+        b=c;
+    }
+    cout<<a;
+    return 0;
+}

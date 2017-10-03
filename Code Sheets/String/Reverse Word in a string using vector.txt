@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#define LL long long int
+#define pf push_front
+using namespace std;
+
+int main()
+{
+	LL i;
+	string s;
+	vector<string> v;
+	v.clear();
+	getline(cin,s);
+	s+=" ";
+	string t="";
+	for(i=0;i<s.length();i++)
+	{
+		if(s[i]!=' ')
+		t+=s[i];
+		else
+		{
+			v.insert(v.begin(),t);
+			t.clear();
+		}
+	}
+	for(i=0;i<v.size();i++)
+	cout<<v[i]<<" ";
+}

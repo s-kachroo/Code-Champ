@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    //cout << "Hello World!" << endl;
+    long int t,n,m;
+    long int n1,n2;
+    cin>>t;
+    while(t--){
+        cin>>n>>m;
+
+        vector< vector<long int> > v(n+1);
+        while(m--){
+            cin>>n1>>n2;
+            v[n1].push_back(n2);
+            v[n2].push_back(n1);
+        }
+        
+        long int visit[1000000]={0};
+        // for(long int i=0;i<100000;i++)
+        //     visit[i]=0;
+        
+        queue<long int> q;
+        q.push(1);
+        visit[1]=1;
+        while(!q.empty()){
+            long int frontNode=q.front();
+            q.pop();
+            cout<<frontNode<<" ";
+            for(long int i=0;i<v[frontNode].size();i++){
+                if(visit[v[frontNode][i]]!=1){
+                    q.push(v[frontNode][i]);
+                    visit[v[frontNode][i]]=1;
+                }
+            }
+        }
+        v.clear();
+        cout<<endl;
+    }
+    return 0;
+}

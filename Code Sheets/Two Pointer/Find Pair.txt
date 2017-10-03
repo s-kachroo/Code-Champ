@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+#include<stdio.h>
+int main()
+{
+	long long int n,k,s,e,i,j,sum=0,q,count=0;
+	cin>>n;
+	int a[n];
+	for(i=0;i<n;i++)
+    	cin>>a[i];
+	
+	cin>>q;
+	while(q--){
+
+	cin>>k;
+
+	for(s=0,e=n-1;s<e;){	    
+	    count=0;
+		sum=a[s]+a[e];
+		if(sum>k)
+	    	e=e-1;
+		if(sum<k)
+		    s=s+1;
+		
+	    if(sum==k){
+		        count=1;
+				cout<<"YES"<<endl;  
+				break;
+        }
+    }
+		if(count==0)
+			cout<<"NO"<<endl;
+	}
+return 0;
+}

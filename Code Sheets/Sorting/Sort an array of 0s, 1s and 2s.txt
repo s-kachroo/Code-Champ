@@ -1,0 +1,43 @@
+#include<iostream>
+#include<algorithm>
+#include<map>
+#include<string>
+using namespace std;
+#define f_in(st) freopen(st,"r",stdin);
+#define f_out(st) freopen(st,"w",stdout);
+
+int main()
+ {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	//code
+	int t,n,a[10000],zero_count=0,one_count=0,two_count=0;
+	cin>>t;
+	while(t--){
+	    cin>>n;
+	    zero_count=0;one_count=0;two_count=0;
+	    for(int i=0;i<n;i++){
+	        cin>>a[i];
+	        if(a[i]==0) zero_count++;
+	        else if(a[i]==1) one_count++;
+	        else if(a[i]==2) two_count++;
+	    }
+	  // cout<<zero_count<<one_count<<two_count<<"!  ";
+	     
+	       for(int i=0;i<zero_count;i++){
+	            a[i]=0; 
+	       }
+	       for(int i=zero_count;i<(zero_count+one_count);i++){
+	            a[i]=1; 
+	       }
+	       for(int i=(zero_count+one_count);i<(zero_count+one_count+two_count);i++){
+	            a[i]=2; 
+	       }
+//0 1 | 2 3  | 4 5 6	     
+	   for(int s=0;s<n;s++)
+	        cout<<a[s]<<" ";
+	   
+	   cout<<endl;     
+	}
+	return 0;
+}

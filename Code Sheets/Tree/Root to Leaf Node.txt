@@ -1,0 +1,105 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+struct node {
+	int data;
+	struct node * left;
+	struct node * right;
+} * root = NULL;
+
+struct node * insertNode(struct node * tNode, int value) {
+	if(tNode == NULL) {
+		struct node * newNode = (struct node *)malloc(sizeof(struct node));
+		newNode->data = value;
+		newNode->left = NULL;
+		newNode->right = NULL;
+		return newNode;
+	}
+	if(tNode->data > value)
+		tNode->left = insertNode(tNode->left, value);
+	else
+		tNode->right = insertNode(tNode->right, value);
+	return tNode;
+}
+
+void buildTree(int a[], int N) {
+	for(int i = 0; i < N; i++) {
+		if(i) {
+			insertNode(root, a[i]);
+		} else {
+			root = insertNode(NULL, a[i]);
+		}
+	}
+}
+
+void inOrderTraversal(struct node * tNode) {
+	if(tNode == NULL) 
+		return;
+	inOrderTraversal(tNode->left);
+	cout << tNode->data << endl;
+	inOrderTraversal(tNode->right);
+}
+
+void printRootToLeafPathUtil(struct node * tRoot, int a[], int a_size) {
+	if(tRoot == NULL)
+		return;
+	a[a_size++] = tRoot -> data;
+	
+	if(tRoot -> left == NULL && tRoot -> right == NULL)
+	{
+		for(int i = 0; i < a_size; i++) 
+		{
+			cout << a[i]<< " ";
+		}
+		cout << endl;
+	}
+	printRootToLeafPathUtil(tRoot -> left, a, a_size);
+	printRootToLeafPathUtil(tRoot -> right, a, a_size);
+}
+
+void printRootToLeafPath(struct node * tRoot) {
+	int a[100005];
+	int a_size = 0;
+	printRootToLeafPathUtil(tRoot, a, a_size);
+}
+// void print(struct new node *tRoot,int a[],int a_size)
+// {   
+//         if(tRoot==NULL)
+//             return;
+    
+//     a[a_size++]=tRoot->data;    
+    
+//     if(tRoot->left==NULL && tRoot->right==NULL)
+//     {
+//         for(int i=0;i<a_size;i++)
+//         {
+            
+//          cout<<a[i]<<" ";       
+            
+//         }
+//         cout<<endl;
+//     }
+    
+//     print(tRoot->left,a,a_size);
+//     print(tRoot->right,a,a_size);
+    
+// }
+
+// void printRootToLeafPath(struct node * tRoot) 
+// {
+//         int a[100005];
+//         int a_size=0;
+//         print(tRoot,a,a_size);
+    
+// }
+
+int main() {
+	int N;
+	cin >> N;
+	int arr[N];
+	for(int i = 0; i < N; i++) {
+		cin >> arr[i];
+	}
+	buildTree(arr, N);
+	printRootToLeafPath(root);
+}

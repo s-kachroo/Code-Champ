@@ -1,0 +1,78 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+struct node {
+	int data;
+	struct node * left;
+	struct node * right;
+} * root = NULL;
+
+struct node * insertNode(struct node * tNode, int value) {
+	if(tNode == NULL) {
+		struct node * newNode = (struct node *)malloc(sizeof(struct node));
+		newNode->data = value;
+		newNode->left = NULL;
+		newNode->right = NULL;
+		return newNode;
+	}
+	if(tNode->data > value)
+		tNode->left = insertNode(tNode->left, value);
+	else
+		tNode->right = insertNode(tNode->right, value);
+	return tNode;
+}
+void buildTree(int a[], int N) {
+	for(int i = 0; i < N; i++) {
+		if(i) {
+			insertNode(root, a[i]);
+		} else {
+			root = insertNode(NULL, a[i]);
+		}
+	}
+}
+//Storing Inorder Traversal in an Array
+// int a[100000];
+// int pos=0;
+// void storeInOrder(struct node * root1){
+    
+//     if(root1==NULL)
+//         return ;
+//     storeInOrder(root1->left);
+//     a[pos++]=root1->data;
+//     storeInOrder(root1->right);
+// }
+//Printing the second element in Inorder traversal
+void print(struct node * tNode, int &c){
+    if(tNode==NULL || c>2)
+        return ;
+    print(tNode->left , c);
+    c++;
+    if(c==2){
+        cout<<tNode->data<<endl;
+        return ;
+    }
+    print(tNode->right , c);
+}
+
+int secondSmallestInBST(struct node * tNode){
+    //  storeInOrder(tNode);
+    //  int ans = a[1];
+    //  return ans;
+     
+    int c=0;
+    print(tNode,c);
+
+}
+
+
+int main() {
+	int N;
+	cin >> N;
+	int arr[N];
+	for(int i = 0; i < N; i++) {
+		cin >> arr[i];
+	}
+	buildTree(arr, N);
+	secondSmallestInBST(root);
+	cout<<endl;
+}

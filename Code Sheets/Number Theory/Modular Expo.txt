@@ -1,0 +1,23 @@
+//Given two numbers A and B, print value of A^B.
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    long int a;
+    long long int b;
+    cin>>a>>b;
+    long long int ans=1;
+    long long int power=a;
+    
+    while(b!=0){
+        if(b%2==1)
+            ans = (ans*power)%(1000000000+7);
+        
+        power =(power*power)%(1000000000+7);
+        
+        b=b>>1;
+    }
+    cout<<ans<<endl;
+    return 0;
+}

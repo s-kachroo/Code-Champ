@@ -1,0 +1,33 @@
+//Algorithm for Counting Sort!
+
+void countSort(char a[]){
+	char output[strlen(a)];
+
+	int i , count [ RANGE+1 ];
+	memset(count,0,sizeof(count));
+	
+
+	//Count the instances
+	for(i=0;a[i];++i){
+		++count[a[i]];
+	}
+
+	//Modifies it into sum count!
+	for(i=0;i<=RANGE;++i){
+		count[i] += count[i-1];
+	}
+
+	//Places objects as its correct position and
+	//decreases the count by one!
+	for(i=0;a[i];++i){
+		output[ count[ a[i] ] - 1 ] = a[i];	
+		--count[a[i]];
+	}
+
+	//Copy the output array to a array so that a array
+	//contains the sorted characters!
+	for(i=0;a[i];++i){
+		a[i]=output[i];
+	}
+
+}

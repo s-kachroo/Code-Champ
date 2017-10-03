@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+ 
+#include<iostream>
+using namespace std;
+int main()
+{
+	long int n1,n2,a1,b1,i,j;
+	cin>>n1;
+    long int a[10000000];
+	long int b[10000000];
+	for(i=0;i<n1;i++)
+		cin>>a[i];
+	
+	cin>>n2;
+	for(j=0;j<n2;j++)
+     cin>>b[j];
+    
+	for(a1=0,b1=0;a1<n1&&b1<n2;)
+    {
+		if(a[a1]>b[b1]){
+			cout<<b[b1]<<" " ;
+			b1++;
+	    }
+		else if(a[a1]<b[b1]){
+			cout<<a[a1]<<" ";
+			a1++;
+		}
+		else{
+	       cout<<a[a1]<<" "<<b[b1]<<" ";
+			a1++;	 b1++;
+		}
+	}
+	
+	if(a1<n1){
+		for(a1;a1<n1;a1++)
+		cout<<a[a1]<<" ";
+	}
+	if(b1<n2){
+		for(b1;b1<n2;b1++)
+		cout<<b[b1]<<" ";
+	}
+	return 0;
+}

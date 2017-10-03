@@ -1,0 +1,21 @@
+//https://www.youtube.com/watch?v=SHcPqUe2GZM
+int shellSort(int a[],int n){
+
+	for(int gap=n/2 ; gap>0 ; gap /= 2){
+		for(int i=gap;i<n;i+=1){
+
+			//Copies the value to temp variable			
+			int temp = a[i];
+			
+			int j;
+			//Compares the elements which are distance apart "gap"
+			for(j=i ; j>=gap && a[j-gap]>temp ; j-=gap)
+				a[j]=a[j-gap];
+				
+			a[j]=temp;	
+		}
+	}
+	return 0;
+}
+
+

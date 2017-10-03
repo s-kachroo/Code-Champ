@@ -1,0 +1,40 @@
+//Given two numbers A and B, find the LCM!
+#include <iostream>
+using namespace std;
+
+int gcd(int a,int b)
+{
+    if(b==0)
+        return a;
+        
+    gcd(b,a%b);
+}
+
+// int lcm(int a,int b)
+// {
+//     int t=a;
+//     while(1)
+//     {
+//         if(t%a==0 && t%b==0)
+//             break;
+//         t++;    
+//     }
+//     return t;
+// }
+
+// int lcm(int a,int b){
+//   static int temp = 1;
+//     if(temp % b == 0 && temp % a == 0)
+//          return temp;
+//     temp++;
+//     lcm(a,b);
+//   return temp;
+// }
+
+int main()
+{
+	int a,b;
+    cin>>a>>b;
+    cout<<((a*b)/(gcd(a,b)));
+    return 0;
+}

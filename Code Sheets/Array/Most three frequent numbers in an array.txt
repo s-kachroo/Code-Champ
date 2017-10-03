@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n;
+	cin>>n;
+	int a[1000];
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+	
+	int b[100];
+	b[0] = b[1] = b[2] = 0;
+	int c[3] = {0};
+    
+    int count=1;
+    int j;
+        for(j=0; j<n; j++){
+            if(j<n-1 && a[j]==a[j+1])
+                	count++;
+            else{
+                if(count > c[0]){
+                    b[2] = b[1]; b[1] = b[0]; b[0] = a[j]; 
+                    c[2] = c[1]; c[1] = c[0]; c[0] = count;
+                }
+                else if(count > c[1]){
+                    b[2] = b[1]; b[1] = a[j];
+                    c[2] = c[1]; c[1] = count;
+                }
+                else if(count > c[2]){
+                    b[2] = a[j]; 
+                    c[2] = count;
+                }
+                count=1;
+            }
+        }
+        
+    for(int k=0;k<3;k++)
+    	cout<<b[k]<<" ";
+	return 0;
+}

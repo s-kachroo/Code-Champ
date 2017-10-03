@@ -1,0 +1,92 @@
+    #include <iostream>
+#include <algorithm>
+#include <queue>
+using namespace std;
+#define f_in(st) freopen(st,"r",stdin);
+#define f_out(st) freopen(st,"w",stdout);
+struct node {
+	int data;
+	struct node * left;
+	struct node * right;
+} * root = NULL;
+
+struct node * insertNode(struct node * tNode, int value) {
+	if(tNode == NULL) {
+		struct node * newNode = (struct node *)malloc(sizeof(struct node));
+		newNode->data = value;
+		newNode->left = NULL;
+		newNode->right = NULL;
+		return newNode;
+	}
+	if(tNode->data > value)
+		tNode->left = insertNode(tNode->left, value);
+	else
+		tNode->right = insertNode(tNode->right, value);
+	return tNode;
+}
+
+void buildTree(int a[], int N) {
+	for(int i = 0; i < N; i++) {
+		if(i) {
+			insertNode(root, a[i]);
+		} else {
+			root = insertNode(NULL, a[i]);
+		}
+	}
+}
+int heightOfTree(struct node* tNode){
+ 	if(tNode==NULL)
+	       return 0;
+ return (max(heightOfTree(tNode->left),heightOfTree(tNode->right)))+1;
+}
+
+// void print(struct node* node,int N){
+//     if(node==NULL)
+//         return ;
+//     if(N==1){
+//         cout<<node->data<<endl;
+//     }
+//     else if(N>1){
+//     print(node->left,N-1);
+//     print(node->right,N-1);
+//     }
+    
+// }
+
+// void levelOrderTraversal(struct node * tNode){
+//   //Your code here
+//   int i;
+//   int h=heightOfTree(tNode);
+//   for(i=1;i<=h;i++)
+//   {
+//         print(tNode,i);   
+//   }
+// }
+
+void levelOrderTraversal(struct node * tNode) {
+    queue<struct node *> q;
+    q.push(tNode);
+    
+    while(!q.empty())
+    {
+        struct node *t=q.front(); 
+        
+        cout<<t->data<<endl;
+        q.pop();
+        if(t->left)
+            q.push(t->left);
+        if(t->right)
+            q.push(t->right);
+    }
+}
+
+int main() {
+	int N;
+	cin >> N;
+	int arr[N];
+	for(int i = 0; i < N; i++) {
+		cin >> arr[i];
+	}
+	buildTree(arr, N);
+	levelOrderTraversal(root);
+}

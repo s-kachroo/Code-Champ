@@ -1,0 +1,52 @@
+//Given a sorted array A and value X, find the count number of occurrences of element X in array!
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n,item,q,i;
+    cin>>n;
+	int a[n];
+	for(i=0;i<n;i++)
+	    cin>>a[i];
+	
+	cin>>q;
+while(q--){
+    cin>>item;
+    int l=0,u=n-1,m,count=0,num1=0,num2=0;
+  
+    while(l<=u){
+        m=(u+l)/2;
+        if(item==a[m]){
+	        count=1;
+	        for(;;){
+	            if(a[m+1]==a[m])
+	                m++;
+	            else{
+	                num1=m;
+	                break;
+                } 
+	        }
+	        for(;;){
+	            if(a[m-1]==a[m])
+	                m--;
+	            else{
+	                num2=m;
+	                break;
+                }
+            }
+        printf("%d\n",num1-num2+1);
+	    break;
+	    }	
+	
+	    else if(item>a[m])
+	        l=m+1;
+	    else
+	        u=m-1;
+    }
+
+ if(count!=1)
+   printf("-1\n");
+    }
+return 0;
+}

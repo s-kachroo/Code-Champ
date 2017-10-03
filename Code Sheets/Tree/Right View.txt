@@ -1,0 +1,80 @@
+#include <iostream>
+#include <algorithm>
+#include <queue>
+using namespace std;
+struct node {
+	int data;
+	struct node * left;
+	struct node * right;
+} * root = NULL;
+
+struct node * insertNode(struct node * tNode, int value) {
+	if(tNode == NULL) {
+		struct node * newNode = (struct node *)malloc(sizeof(struct node));
+		newNode->data = value;
+		newNode->left = NULL;
+		newNode->right = NULL;
+		return newNode;
+	}
+	if(tNode->data > value)
+		tNode->left = insertNode(tNode->left, value);
+	else
+		tNode->right = insertNode(tNode->right, value);
+	return tNode;
+}
+
+void buildTree(int a[], int N) {
+	for(int i = 0; i < N; i++) {
+		if(i) {
+			insertNode(root, a[i]);
+		} else {
+			root = insertNode(NULL, a[i]);
+		}
+	}
+}
+void printRight(struct node* tNode,int level, int *max_level){
+    if(tNode==NULL)
+        return;
+        
+    if(level>*max_level){
+        cout<<tNode->data<<endl;
+        *max_level=level;
+    }
+    printRight(tNode->right,level+1,max_level);
+    printRight(tNode->left ,level+1,max_level);
+}
+void printRightViewQueue(struct node *tNode){
+	queue<struct node *> Q;
+	Q.push(tNode);
+	while(!Q.empty()) {
+		int queueSize = Q.size();
+		int printvalue;
+		for(int i = 0; i < queueSize; i++) {
+			struct node * frontNode = Q.front();
+			Q.pop();
+			printvalue = frontNode -> data;
+			if(frontNode->left)
+				Q.push(frontNode->left);
+			if(frontNode->right)
+				Q.push(frontNode->right);
+		}
+		cout << printvalue <<endl;
+	}
+}
+void printRightView(struct node * tNode) {
+    printRightViewQueue(tNode);
+    
+    // int max_level=0;
+    // printRight(tNode,1,&max_level);
+}
+
+int main() {
+	int N;
+	cin >> N;
+	int arr[N];
+	for(int i = 0; i < N; i++) {
+		cin >> arr[i];
+	}
+	buildTree(arr, N);
+	printRightView(root);
+}

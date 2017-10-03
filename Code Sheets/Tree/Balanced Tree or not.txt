@@ -1,0 +1,115 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct node {
+	int data;
+	struct node * left;
+	struct node * right;
+} * root = NULL;
+
+struct node * insertNode(struct node * tNode, int value) {
+	if(tNode == NULL) {
+		struct node * newNode = (struct node *)malloc(sizeof(struct node));
+		newNode->data = value;
+		newNode->left = NULL;
+		newNode->right = NULL;
+		return newNode;
+	}
+	if(tNode->data > value)
+		tNode->left = insertNode(tNode->left, value);
+	else
+		tNode->right = insertNode(tNode->right, value);
+	return tNode;
+}
+
+void buildTree(int a[], int N) {
+	for(int i = 0; i < N; i++) {
+		if(i) {
+			insertNode(root, a[i]);
+		} else {
+			root = insertNode(NULL, a[i]);
+		}
+	}
+}
+int heightOfTree(struct node * tNode){
+    if(tNode==NULL) return 0;
+    return (max(heightOfTree(tNode->left),heightOfTree(tNode->right)))+1;
+}
+
+/* The function returns true if root is balanced else false
+   The second parameter is to store the height of tree.  
+   Initially, we need to pass a pointer to a location with value 
+   as 0. We can also write a wrapper over this function */
+bool isBalanced(struct node *root, int* height)
+{
+  /* lh --> Height of left subtree 
+     rh --> Height of right subtree */   
+  int lh = 0, rh = 0;  
+ 
+  /* l will be true if left subtree is balanced 
+    and r will be true if right subtree is balanced */
+  int l = 0, r = 0;
+     
+  if(root == NULL)
+  {
+    *height = 0;
+     return 1;
+  }
+ 
+  /* Get the heights of left and right subtrees in lh and rh 
+    And store the returned values in l and r */   
+  l = isBalanced(root->left, &lh);
+  r = isBalanced(root->right,&rh);
+ 
+  /* Height of current node is max of heights of left and 
+     right subtrees plus 1*/   
+  *height = (lh > rh? lh: rh) + 1;
+     
+  /* If difference between heights of left and right 
+     subtrees is more than 2 then this node is not balanced
+     so return 0 */
+  if((lh - rh >= 2) || (rh - lh >= 2))
+    return 0;
+     
+  /* If this node is balanced and left and right subtrees 
+    are balanced then return true */
+  else return l&&r;
+}
+
+bool isBalanced2( Node* root, int *height ) {
+	if( root == NULL ){
+		*height = 0;
+		return 1;
+	}
+	else {
+
+	int lh = 0;
+	int rh = 0;
+
+	bool c1 = isBalanced1( root -> left,&lh );
+	bool c2 = isBalanced1( root -> right,&rh );
+	bool c3 = ( abs(lh-rh) <= 1 );
+
+	*height = max(lh,rh) + 1;
+
+		if( c1 && c2 && c3 )
+			return true;
+
+		return false;
+	}
+} 
+
+int main() {
+	int N;
+	cin >> N;
+	int arr[N];
+	for(int i = 0; i < N; i++) {
+		cin >> arr[i];
+	}
+	buildTree(arr, N);
+	int h = 0;
+	bool b =  isBalancedTree(root,&h);
+	if(b)
+		cout << "YES" << endl;
+	else
+		cout << "NO" << endl;
+}

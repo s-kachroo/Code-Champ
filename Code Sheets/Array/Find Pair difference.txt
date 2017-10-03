@@ -1,0 +1,74 @@
+//First sort the array in O(nlogn) and then use two pointers to check if the pair exists in O(n)!
+// Time-O(nlogn)
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+bool findDiff(int a[],int size,int n){
+    
+     int i = 0;  
+    int j = 1;
+    
+// Search for a pair
+    
+     while (i<size && j<size)
+{
+    
+    		if (i != j && a[j]-a[i] == n){
+        
+    			return true;
+   
+		     }
+     
+   		else if (a[j]-a[i] < n)
+       
+     			j++;
+        
+		else
+           
+ 			i++;
+    
+     }
+  
+ 	return false;
+
+}
+
+
+int main()
+ {
+	
+//code
+	
+	int t;
+	
+	cin>>t;
+    
+	int n,k,a[100001];
+	
+	while(t--){
+	   
+	cin>>n>>k;
+	   
+		for(int i=0;i<n;i++)
+	 
+		        cin>>a[i];
+	   
+	sort(a,a+n);
+	 
+	
+	 if(findDiff(a,n,k)==true)
+	 
+	       cout<<"1"<<endl;
+	  
+	 else
+	    
+	       cout<<"-1"<<endl;
+
+	}
+	
+return 0;
+
+}

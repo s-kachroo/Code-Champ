@@ -1,0 +1,24 @@
+//Given two numbers A and B, find the GCD!
+#include <iostream>
+using namespace std;
+
+int gcd(int n1,int n2)
+{
+//     if(b==0)
+//         return a;
+//     gcd(b,a%b);
+    while(n1!=n2){
+        if(n1 > n2)
+            n1 -= n2;
+        else
+            n2 -= n1;
+    }
+    return n1;
+}
+int main()
+{
+	int a,b;
+    cin>>a>>b;
+    cout<<gcd(a,b);
+    return 0;
+}
